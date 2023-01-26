@@ -1,0 +1,41 @@
+How many customers per sales representative?
+SELECT ee. Title, ee. FirstName, ee. LastName, count (cu. CustomerId) as NumberofCustomers
+FROM Invoice  iv
+JOIN Customer  cu
+ON iv. CustomerId = cu. CustomerId
+JOIN Employee ee
+ON ee. EmployeeId = cu. SupportRepId
+GROUP BY ee. Title, ee. FirstName, ee. LastName
+
+What are the top 10 artist purchased
+SELECT ar. name, SUM (il. quantity) Units_Sold
+From Artist ar
+JOIN Album al
+ON Ar. ArtistId = al. ArtistId
+Join Track t
+ON t. AlbumID = al. AlbumId
+JOIN InvoiceLine il
+ON t. TrackId = il. TrackId
+GROUP BY ar. Name
+ORDER BY Units_Sold DESC
+
+How many songs per Genre?
+SELECT gr. Name, count(gr.Name)
+FROM Track t
+JOIN Genre gr
+ON t. GenreId = gr. GenreId
+GROUP BY gr. Name
+
+Who is writing the rock music?
+SELECT ar. ArtistId, ar. Name, count(t. Name) AS Songs
+FROM Track t
+JOIN Genre ge
+ON ge. GenreId = t. GenreId
+JOIN Album al
+ON al. AlbumId = t. AlbumId
+JOIN Artist ar
+ON ar. ArtistId = al. ArtistId
+WHERE ge. Name = 'Rock'
+GROUP BY ar. Name
+ORDER BY songs DESC
+LIMIT 10
