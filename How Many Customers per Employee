@@ -1,7 +1,0 @@
-SELECT *, count (*)
-FROM Invoice  iv
-JOIN Customer  cu
-ON iv. CustomerId = cu. CustomerId
-JOIN Employee ee
-ON ee. EmployeeId = cu. SupportRepId
-GROUP BY ee. EmployeeId
